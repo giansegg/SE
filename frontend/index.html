@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Calculadora de Distancias</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Calculadora de Distancias entre Ciudades</h1>
+      <form id="distanceForm">
+        <label for="city1">Ciudad 1:</label>
+        <input type="text" id="city1" required />
+        <label for="country1">País 1:</label>
+        <input type="text" id="country1" required />
+        <label for="city2">Ciudad 2:</label>
+        <input type="text" id="city2" required />
+        <label for="country2">País 2:</label>
+        <input type="text" id="country2" required />
+        <button type="submit">Calcular Distancia</button>
+      </form>
+      <div id="result"></div>
+    </div>
+
+    <script src="requests.js"></script>
+  </body>
+</html>
