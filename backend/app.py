@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from services.csv_service import CsvService
-from services.api_service import ApiService
+from services.api_service import APIService
 from services.mock_service import MockService
 
 
@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 csv_service = CsvService()
-api_service = ApiService()
+api_service = APIService()
 mock_service = MockService()
 
 
@@ -30,18 +30,18 @@ def get_distance():
     option = request.args.get('option', 'csv')
 
     service = get_service(option)
-    Cordenada1 = service.get_distance(city1, country1)
-    Cordenada2 = service.get_distance(city2, country2)
+    coords1 = service.get_distance(city1, country1)
+    coords2 = service.get_distance(city2, country2)
 
-    if Cordenada1 is None or Cordenada2 is None:
+    if coords1 is None or coords2 is None:
         return jsonify({'error': 'City not found'}), 404
     else:
-        return jsonify({'distance': service.calculate_distance(Cordenada1, Cordenada2)})
+        return jsonify({'distance': service.calculate_distance(coords1, coords2)})
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-    
+
 
 
     
