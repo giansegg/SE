@@ -8,8 +8,7 @@ from utils.haversine import get_distance_harvesine
 
 
 app = Flask(__name__)
-CORS(app, resources={r"/data": {"origins": "http://localhost:8000"}})  # Configuración de CORS
-
+CORS(app, resources={r"/data": {"origins": "http://localhost:8000"}})  
 
 csv_service = CsvService()
 api_service = APIService()
@@ -38,9 +37,12 @@ def get_distance():
 
     if coords1 is None or coords2 is None:
         return jsonify({'error': 'City not found'}), 404
-    else:
-        distance = get_distance_harvesine(coords1['lat'], coords1['lng'], coords2['lat'], coords2['lng'])  
-        return jsonify({'distance': distance})
+    lat1 = float(coords1['lat'])
+    lng1 = float(coords1['lng'])
+    lat2 = float(coords2['lat'])
+    lng2 = float(coords2['lng'])
+    distance = get_distance_harvesine(lat1, lng1, lat2, lng2)  
+    return jsonify({'distance': distance})
 
 
 if __name__ == '__main__':

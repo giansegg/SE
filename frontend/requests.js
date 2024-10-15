@@ -8,7 +8,7 @@ document
     const city2 = document.getElementById("city2").value;
     const country2 = document.getElementById("country2").value;
 
-    const option = "csv";
+    const option = document.getElementById("option").value;
 
     fetch(
       `http://127.0.0.1:5000/data?city1=${city1}&country1=${country1}&city2=${city2}&country2=${country2}&option=${option}`
