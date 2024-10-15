@@ -3,26 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Calculadora de Distancias</title>
+    <title>Calculadora de Distancia</title>
   </head>
   <body>
-    <div class="container">
-      <h1>Calculadora de Distancias entre Ciudades</h1>
-      <form id="distanceForm">
+    <h1>Calculadora de Distancia entre Ciudades</h1>
+    <form id="distanceForm">
+      <div>
         <label for="city1">Ciudad 1:</label>
         <input type="text" id="city1" required />
+      </div>
+      <div>
         <label for="country1">País 1:</label>
         <input type="text" id="country1" required />
+      </div>
+      <div>
         <label for="city2">Ciudad 2:</label>
         <input type="text" id="city2" required />
+      </div>
+      <div>
         <label for="country2">País 2:</label>
         <input type="text" id="country2" required />
-        <button type="submit">Calcular Distancia</button>
-      </form>
-      <div id="result"></div>
-    </div>
+      </div>
+      <div>
+        <label for="option">Opciones:</label>
+        <select id="option">
+          <option value="csv">CSV</option>
+          <option value="api">API</option>
+          <option value="mock">Mock</option>
+        </select>
+      </div>
+      <button type="submit">Calcular Distancia</button>
+    </form>
+    <div id="result"></div>
+    <script>
+      document
+        .getElementById("distanceForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
 
-    <script src="requests.js"></script>
+          const city1 = document.getElementById("city1").value;
+          const country1 = document.getElementById("country1").value;
+          const city2 = document.getElementById("city2").value;
+          const country2 = document.getElementById("country2").value;
+          const option = document.getElementById("option").value;
+
+          const url = `http://127.0.0.1:5000/data?city1=${city1}&country1=${country1}&city2=${city2}&country2=${country2}&option=${option}`;
+          console.log(url); // Agrega esta línea para verificar la URL
+
+          fetch(url)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Error en la solicitud");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              document.getElementById(
+                "result"
+              ).innerText = `La distancia entre ${city1}, ${country1} y ${city2}, ${country2} es: ${data.distance} km`;
+            })
+            .catch((error) => {
+              document.getElementById(
+                "result"
+              ).innerText = `Error: ${error.message}`;
+            });
+        });
+    </script>
   </body>
 </html>
