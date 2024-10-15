@@ -7,5 +7,5 @@ class APIService(CoordsService):
         response = requests.get(url)
         if response.status_code == 200 and response.json():
             data = response.json()[0]
-            return {'lat': float(data['lat']), 'lon': float(data['lng'])}
+            return {'lat': float(data['lat']), 'lng': float(data['lng'])}
         return None
