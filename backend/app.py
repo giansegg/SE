@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory, render_template
 from services.csv_service import CsvService
 from services.api_service import APIService
 from services.mock_service import MockService
@@ -7,13 +7,21 @@ from utils.haversine import get_distance_harvesine
 
 
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../frontend', static_url_path='/')
 CORS(app, resources={r"/data": {"origins": "http://localhost:8000"}})  
 
 csv_service = CsvService()
 api_service = APIService()
 mock_service = MockService()
 
+@app.route('/')
+def serve_index():
+    return send_from_directory(app.static_folder, 'index.html')
+
+# Ruta para servir otros archivos estáticos (CSS, JS)
+@app.route('/<path:path>')
+def serve_static_files(path):
+    return send_from_directory(app.static_folder, path)
 
 def get_service(option):
     if option == 'csv':
