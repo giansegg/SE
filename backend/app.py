@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory, render_template
+from flask import Flask, request, jsonify, send_from_directory
 from services.csv_service import CsvService
 from services.api_service import APIService
 from services.mock_service import MockService
@@ -7,7 +7,7 @@ from utils.haversine import get_distance_harvesine
 
 
 
-app = Flask(__name__, static_folder='../frontend', static_url_path='/')
+app = Flask(__name__, static_folder='./frontend', static_url_path='/')
 CORS(app, resources={r"/data": {"origins": "http://localhost:8000"}})  
 
 csv_service = CsvService()
