@@ -18,7 +18,7 @@ mock_service = MockService()
 def serve_index():
     return send_from_directory(app.static_folder, 'index.html')
 
-# Ruta para servir otros archivos estáticos (CSS, JS)
+
 @app.route('/<path:path>')
 def serve_static_files(path):
     return send_from_directory(app.static_folder, path)
